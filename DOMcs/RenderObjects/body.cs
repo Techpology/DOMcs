@@ -11,8 +11,8 @@ namespace DOMcs.RenderObjects
     internal class body
     {
         public Form window;
-        Div _body;
-        Div _topBorder;
+        public Div _body;
+        public Div _topBorder;
 
         private Point _mouseLoc;
         private void win_MouseDown(object sender, MouseEventArgs e)
@@ -92,6 +92,15 @@ namespace DOMcs.RenderObjects
             }
         }
         public void render() { window.Controls.Add(_body._return()); window.ShowDialog(); }
+        public void reset() { window.Controls.Remove(_body._return()); }
+        public void changePage(Div page) { 
+            reset();
+            _body.tblPanel.Controls.Clear();
+            _body.insert(_topBorder._return(), 0, 0);
+            _body.insert(page._return(), 1, 0);
+            window.Controls.Add(_body._return());
+            window.Update();
+        }
 
         public void insert(Control _a)
         {
